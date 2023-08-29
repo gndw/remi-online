@@ -5,11 +5,11 @@ const path = require('path');
 
 module.exports = {
 
-    entry: './src/index.js',
+    entry: './src/client/index.js',
 
     output: {
-        path: path.resolve(__dirname, 'build'),
-        publicPath: '/build/',
+        path: path.resolve(__dirname, 'build', 'client'),
+        publicPath: '/build/client/',
         filename: 'project.bundle.js'
     },
 
