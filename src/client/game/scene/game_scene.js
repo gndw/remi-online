@@ -36,6 +36,18 @@ export default class GameScene extends Phaser.Scene {
             .on('pointerover', () => this.drawButton.setStyle({ fill: '#f39c12' }))
             .on('pointerout', () => this.drawButton.setStyle({ fill: '#FFF' }))
 
+        this.add.text(this.cameras.main.centerX, this.cameras.main.centerY+200, 'Draw from graveyard')
+            .setOrigin(0.5)
+            .setPadding(10)
+            .setStyle({ backgroundColor: '#111' })
+            .setInteractive({ useHandCursor: true })
+            .on('pointerdown', () => {
+                this.remi.drawCardFromGraveyard("123",0)
+                this.refresh()
+            })
+            .on('pointerover', () => this.drawButton.setStyle({ fill: '#f39c12' }))
+            .on('pointerout', () => this.drawButton.setStyle({ fill: '#FFF' }))
+
         this.deckValue = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY / 2, "")
             .setOrigin(0.5)
         this.handValue = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY * (3 / 4), "")

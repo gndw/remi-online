@@ -4,6 +4,7 @@ export default class Remi {
 
         this.data = {
             deck: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+            // used as graveyard
             graveyard: new Array(),
             hand:new Map([
                 [
@@ -14,6 +15,7 @@ export default class Remi {
                     }
                 ],
             ]),
+            // this will be used to be player's complete set
             handGraveyard: new Array()
         }
 
@@ -21,7 +23,9 @@ export default class Remi {
 
     draw(playerID) {
         let card = this.data.deck.pop()
-        this.data.hand.get(playerID).cards.push(card)
+        if (card != undefined) {
+            this.data.hand.get(playerID).cards.push(card)
+        }
     }
 
     getDeck() {
@@ -32,9 +36,16 @@ export default class Remi {
         return this.data.graveyard
     }
 
+    drawCardFromGraveyard(playerID, graveyardIdx) {
+        let cards = this.data.graveyard.splice(graveyardIdx, this.data.graveyard.length-graveyardIdx)
+        if (cards.length > 0) {
+            this.data.hand.get(playerID).cards.push(cards)
+        }
+    }
+
     discardCard(playerID, cardIdx) {
         let discardedCard = this.data.hand.get(playerID).cards.splice(cardIdx, 1)
-        if (discardedCard.length != 0) {
+        if (discardedCard.length > 0) {
             this.data.graveyard.push(discardedCard)
         }
     }
