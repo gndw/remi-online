@@ -6,12 +6,12 @@ export default class GameScene extends Phaser.Scene {
     }
     init() {
         this.remi = new Remi()
+        this.remi.shuffleDeck()
     }
     preload() {
 
     }
     create() {
-
         this.drawButton = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY, 'Add one')
             .setOrigin(0.5)
             .setPadding(10)
