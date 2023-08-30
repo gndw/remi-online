@@ -24,7 +24,7 @@ export default class GameScene extends Phaser.Scene {
             .on('pointerover', () => this.drawButton.setStyle({ fill: '#f39c12' }))
             .on('pointerout', () => this.drawButton.setStyle({ fill: '#FFF' }))
 
-        this.drawButton = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY+100, 'Discard one')
+        this.discardButton = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY+100, 'Discard one')
             .setOrigin(0.5)
             .setPadding(10)
             .setStyle({ backgroundColor: '#111' })
@@ -33,20 +33,21 @@ export default class GameScene extends Phaser.Scene {
                 this.remi.discardCard("123",0)
                 this.refresh()
             })
-            .on('pointerover', () => this.drawButton.setStyle({ fill: '#f39c12' }))
-            .on('pointerout', () => this.drawButton.setStyle({ fill: '#FFF' }))
+            .on('pointerover', () => this.discardButton.setStyle({ fill: '#f39c12' }))
+            .on('pointerout', () => this.discardButton.setStyle({ fill: '#FFF' }))
 
-        this.add.text(this.cameras.main.centerX, this.cameras.main.centerY+200, 'Draw from graveyard')
+        this.drawFromGraveYardButton =  this.add.text(this.cameras.main.centerX, this.cameras.main.centerY+200, 'Draw from graveyard')
             .setOrigin(0.5)
             .setPadding(10)
             .setStyle({ backgroundColor: '#111' })
             .setInteractive({ useHandCursor: true })
             .on('pointerdown', () => {
+                // please fix this if we are already capable to pick a card from graveyard with specific idx
                 this.remi.drawCardFromGraveyard("123",0)
                 this.refresh()
             })
-            .on('pointerover', () => this.drawButton.setStyle({ fill: '#f39c12' }))
-            .on('pointerout', () => this.drawButton.setStyle({ fill: '#FFF' }))
+            .on('pointerover', () => this.drawFromGraveYardButton.setStyle({ fill: '#f39c12' }))
+            .on('pointerout', () => this.drawFromGraveYardButton.setStyle({ fill: '#FFF' }))
 
         this.deckValue = this.add.text(this.cameras.main.centerX, this.cameras.main.centerY / 2, "")
             .setOrigin(0.5)
