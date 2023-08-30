@@ -4,21 +4,27 @@ export default class Remi {
 
         this.data = {
             deck: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-            hand: [
-                {
-                    id: "123",
-                    cards: []
-                }
-            ]
+            // used as graveyard
+            graveyard: new Array(),
+            hand:new Map([
+                [
+                    "123",
+                    {
+                        id:"123",
+                        cards:[]
+                    }
+                ],
+            ]),
+            // this will be used to be player's complete set
+            handGraveyard: new Array()
         }
 
     }
 
     draw(playerID) {
         let card = this.data.deck.pop()
-        let playerIndex = this.data.hand.findIndex(h => h.id === playerID)
-        if (playerIndex != -1) {
-            this.data.hand[playerIndex].cards.push(card)
+        if (card != undefined) {
+            this.data.hand.get(playerID).cards.push(card)
         }
     }
 
@@ -26,6 +32,24 @@ export default class Remi {
         return this.data.deck
     }
 
+    getGraveYard() {
+        return this.data.graveyard
+    }
+
+    drawCardFromGraveyard(playerID, graveyardIdx) {
+        let cards = this.data.graveyard.splice(graveyardIdx, this.data.graveyard.length-graveyardIdx)
+        if (cards.length > 0) {
+            this.data.hand.get(playerID).cards.push(cards)
+        }
+    }
+
+    discardCard(playerID, cardIdx) {
+        let discardedCard = this.data.hand.get(playerID).cards.splice(cardIdx, 1)
+        if (discardedCard.length > 0) {
+            this.data.graveyard.push(discardedCard)
+        }
+    }
+    
     shuffleDeck() {
         let currentIdx = this.data.deck.length, randomIdx
         
@@ -41,11 +65,7 @@ export default class Remi {
     }
 
     getCardByPlayerID(playerID) {
-        let playerIndex = this.data.hand.findIndex(h => h.id === playerID)
-        if (playerIndex != -1) {
-            return this.data.hand[playerIndex].cards
-        }
-        return []
+        return this.data.hand.get(playerID).cards
     }
 
 }
