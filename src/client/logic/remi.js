@@ -13,7 +13,8 @@ export default class Remi {
                         cards:[]
                     }
                 ],
-            ])
+            ]),
+            handGraveyard: new Array()
         }
 
     }
@@ -33,7 +34,9 @@ export default class Remi {
 
     discardCard(playerID, cardIdx) {
         let discardedCard = this.data.hand.get(playerID).cards.splice(cardIdx, 1)
-        this.data.graveyard.push(discardedCard)
+        if (discardedCard.length != 0) {
+            this.data.graveyard.push(discardedCard)
+        }
     }
     
     shuffleDeck() {
