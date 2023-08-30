@@ -26,6 +26,20 @@ export default class Remi {
         return this.data.deck
     }
 
+    shuffleDeck() {
+        let currentIdx = this.data.deck.length, randomIdx
+        
+        while (currentIdx > 0) {
+            // get random idx
+            randomIdx = Math.floor(Math.random() * currentIdx)
+            currentIdx--
+            
+            // swap cards
+            [this.data.deck[currentIdx], this.data.deck[randomIdx]] = 
+            [this.data.deck[randomIdx], this.data.deck[currentIdx]]
+        }
+    }
+
     getCardByPlayerID(playerID) {
         let playerIndex = this.data.hand.findIndex(h => h.id === playerID)
         if (playerIndex != -1) {
